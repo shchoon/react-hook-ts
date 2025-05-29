@@ -4,13 +4,14 @@ function useState(initialState) {
   if (useStateLen === states.length) {
     states.push(initialState);
   }
-  console.log("inUseState", useStateLen);
+  const currentIndex = useStateLen;
+  console.log("inUseState", currentIndex);
 
-  const state = states[useStateLen];
+  const state = states[currentIndex];
 
   const setState = (nextState) => {
-    console.log("inSetState", useStateLen);
-    states[useStateLen] = nextState;
+    console.log("inSetState", currentIndex);
+    states[currentIndex] = nextState;
     render();
   };
 
