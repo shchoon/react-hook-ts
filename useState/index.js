@@ -1,36 +1,48 @@
-let state;
+let useStateLen = 0;
+let states = [];
 function useState(initialState) {
-  if (state === undefined) {
-    state = initialState;
+  if (useStateLen === states.length) {
+    states.push(initialState);
   }
+  console.log("inUseState", useStateLen);
+
+  const state = states[useStateLen];
 
   const setState = (nextState) => {
-    state = nextState;
+    console.log("inSetState", useStateLen);
+    states[useStateLen] = nextState;
     render();
   };
+
+  useStateLen += 1;
 
   return [state, setState];
 }
 
-function counter() {
-  const [count, setCount] = useState(0);
+function counter1() {
+  const [count1, setCount1] = useState(0);
+  const [count2, setCount2] = useState(0);
 
-  window.increment1 = () => setCount(count + 1);
+  window.increment1 = () => setCount1(count1 + 1);
+  window.increment2 = () => setCount2(count2 + 1);
 
   return `<div>
-  <strong>count: ${count}</strong>
+  <strong>count1: ${count1}</strong>
   <button onClick="increment1()">+</button>
+  </br>
+  <strong>count2: ${count2}</strong>
+  <button onClick="increment2()">+</button>
   </div>`;
 }
-
-// function counter2() {
-//   const [count, setCount] = useState(0)
-// }
 
 function render() {
   const app = document.querySelector("#app");
 
-  app.innerHTML = counter();
+  app.innerHTML = `<div>
+  ${counter1()}
+  </div>`;
+
+  useStateLen = 0;
 }
 
 render();
