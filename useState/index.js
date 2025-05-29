@@ -1,5 +1,5 @@
+let state;
 function useState(initialState) {
-  let state;
   if (state === undefined) {
     state = initialState;
   }
@@ -15,13 +15,17 @@ function useState(initialState) {
 function counter() {
   const [count, setCount] = useState(0);
 
-  window.increment = () => setCount(count + 1);
+  window.increment1 = () => setCount(count + 1);
 
   return `<div>
   <strong>count: ${count}</strong>
-  <button onClick={increment}>+</button>
+  <button onClick="increment1()">+</button>
   </div>`;
 }
+
+// function counter2() {
+//   const [count, setCount] = useState(0)
+// }
 
 function render() {
   const app = document.querySelector("#app");
