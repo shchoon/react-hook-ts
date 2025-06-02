@@ -1,19 +1,19 @@
 "use strict";
 let useStateLen = 0;
-let states = [];
+let states1 = [];
 function useState(initialState) {
-    if (useStateLen === states.length) {
-        states.push(initialState);
+    if (useStateLen === states1.length) {
+        states1.push(initialState);
     }
     const currentIndex = useStateLen;
     console.log("inUseState", currentIndex);
-    const state = states[currentIndex];
+    const state = states1[currentIndex];
     const setState = (nextState) => {
         if (typeof nextState === "function") {
-            states[currentIndex] = nextState(states[currentIndex]);
+            states1[currentIndex] = nextState(states1[currentIndex]);
         }
         else {
-            states[currentIndex] = nextState;
+            states1[currentIndex] = nextState;
         }
         console.log("inSetState", currentIndex);
         render();

@@ -1,23 +1,23 @@
 let useStateLen = 0;
-let states: any[] = [];
-function useState<T>(
+let states1: any[] = [];
+function useState1<T>(
   initialState: T
 ): [T, (nextState: T | ((prev: T) => T)) => void] {
-  if (useStateLen === states.length) {
-    states.push(initialState);
+  if (useStateLen === states1.length) {
+    states1.push(initialState);
   }
   const currentIndex = useStateLen;
   console.log("inUseState", currentIndex);
 
-  const state = states[currentIndex];
+  const state = states1[currentIndex];
 
   const setState = (nextState: T | ((prev: T) => T)) => {
     if (typeof nextState === "function") {
-      states[currentIndex] = (nextState as (prev: T) => T)(
-        states[currentIndex]
+      states1[currentIndex] = (nextState as (prev: T) => T)(
+        states1[currentIndex]
       );
     } else {
-      states[currentIndex] = nextState;
+      states1[currentIndex] = nextState;
     }
     console.log("inSetState", currentIndex);
     render();
@@ -29,8 +29,8 @@ function useState<T>(
 }
 
 function counter1() {
-  const [count1, setCount1] = useState(0);
-  const [count2, setCount2] = useState(0);
+  const [count1, setCount1] = useState1(0);
+  const [count2, setCount2] = useState1(0);
 
   (window as any).increment1 = () => setCount1((prev) => prev + 1);
   (window as any).increment2 = () => setCount2(count2 + 1);
@@ -45,7 +45,7 @@ function counter1() {
 }
 
 function input() {
-  const [text, setText] = useState("");
+  const [text, setText] = useState1("");
 
   // 렌더링된 후 실제 DOM 요소에 이벤트 리스너 붙이기 위해 setTimeout 활용
   setTimeout(() => {
